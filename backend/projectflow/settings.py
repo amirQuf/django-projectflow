@@ -138,3 +138,18 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
 }
+
+
+STATIC_ROOT = BASE_DIR / "static"
+
+
+STATICFILES_DIRS = [
+    BASE_DIR / "assets",
+]
+
+STATIC_URL = "/static/"
+MEDIA_URL = "/media/"
+
+APPEND_SLASH = True
+
+REST_USE_JWT = True
