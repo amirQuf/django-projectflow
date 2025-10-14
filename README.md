@@ -1,5 +1,6 @@
 # django-projectflow
 ---
+It's just a template. I will come back soon 
 ````markdown
 # 🐍 Django Backend Project
 A modern Django backend project following best practices for clean architecture, scalability, and maintainability.
