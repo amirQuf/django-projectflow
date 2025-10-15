@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # local
     "core.apps.CoreConfig",
     "users.apps.UsersConfig",
+    "team.apps.TeamConfig",
 ]
 
 MIDDLEWARE = [
