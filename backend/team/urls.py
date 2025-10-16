@@ -4,7 +4,7 @@ from .views import TeamViewSet, TeamMemberViewSet, InvitationViewSet, ProjectVie
 router = SimpleRouter()
 router.register("team", TeamViewSet)
 router.register("teammeber", TeamMemberViewSet)
-router.register("Invitation", InvitationViewSet)
+router.register("invite", InvitationViewSet)
 router.register("project", ProjectViewSet)
 
 urlpatterns = router.urls

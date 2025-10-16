@@ -1,6 +1,8 @@
 from django.db import models
 
 from users.models import CustomUser
+import uuid
+from django.utils.timezone import now, timedelta
 
 
 class Team(models.Model):
@@ -35,11 +37,15 @@ class Invitation(models.Model):
 
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
     email = models.EmailField()
-    token = models.CharField(unique=True)
+    token = models.CharField(unique=True, default=uuid.uuid4)
     status = models.CharField(
         max_length=1, choices=Status.choices, default=Status.PENDING
     )
     created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField(default=now() + timedelta(days=3))
+
+    def invite_link(self):
+        return f"https://yourapp.com/invite/{self.token}"
 
 
 class Project(models.Model):

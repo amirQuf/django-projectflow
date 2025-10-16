@@ -7,6 +7,9 @@ from .serializers import (
     ProjectSerializer,
 )
 
+from rest_framework.response import Response
+from .services import send_invitation_email
+
 
 class TeamViewSet(ModelViewSet):
     queryset = Team.objects.all()
@@ -21,6 +24,21 @@ class TeamMemberViewSet(ModelViewSet):
 class InvitationViewSet(ModelViewSet):
     queryset = Invitation.objects.all()
     serializer_class = InvitationSerializer
+
+    def create(self, request):
+
+        serializer = InvitationSerializer(
+            data=request.data, context={"request": request}
+        )
+        serializer.is_valid(raise_exception=True)
+        invitation = serializer.save()
+        return Response(
+            {
+                "type": "success",
+                "message": "Email has sent.",
+                "result": {serializer.validated_data},
+            }
+        )
 
 
 class ProjectViewSet(ModelViewSet):
