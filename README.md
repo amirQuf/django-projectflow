@@ -1,7 +1,10 @@
 # django-projectflow
 ---
-It's just a template. I will come back soon 
+A web application where users (teams, freelancers, companies) can create projects, assign tasks, chat, upload files, see progress status, and make payments.
+
 ````markdown
+
+
 # 🐍 Django Backend Project
 A modern Django backend project following best practices for clean architecture, scalability, and maintainability.
 ---
