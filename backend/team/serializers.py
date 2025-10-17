@@ -1,19 +1,20 @@
-from rest_framework.serializers import (
-    ModelSerializer,
-    CharField,
-    PrimaryKeyRelatedField,
-)
-from .models import Team, TeamMember, Invitation, Project
+from rest_framework import serializers
+
+from .models.team import Team
+from .models.team_member import TeamMember
+from .models.invitation import Invitation
+from .models.project import Project
 
 
-from .services import send_invitation_email, invite_user
+from .tasks import send_invitation_email
+
 from users.serializers import CustomUserSerializer
 from users.models import CustomUser
 
 
-class TeamSerializer(ModelSerializer):
+class TeamSerializer(serializers.ModelSerializer):
     owner = CustomUserSerializer(read_only=True)
-    owner_id = PrimaryKeyRelatedField(
+    owner_id = serializers.PrimaryKeyRelatedField(
         queryset=CustomUser.objects.all(), write_only=True
     )
 
@@ -27,20 +28,22 @@ class TeamSerializer(ModelSerializer):
         fields = ["id", "name", "owner", "owner_id", "created", "modified"]
 
 
-class TeamMemberSerializer(ModelSerializer):
+class TeamMemberSerializer(serializers.ModelSerializer):
     team = TeamSerializer(read_only=True)
     user = CustomUserSerializer(read_only=True)
 
-    team_id = PrimaryKeyRelatedField(queryset=Team.objects.all(), write_only=True)
+    team_id = serializers.PrimaryKeyRelatedField(
+        queryset=Team.objects.all(), write_only=True
+    )
 
     class Meta:
         model = TeamMember
         fields = ["id", "team", "user", "role", "joined_at"]
 
 
-class InvitationSerializer(ModelSerializer):
+class InvitationSerializer(serializers.ModelSerializer):
     team = TeamSerializer(read_only=True)
-    status_display = CharField(read_only=True, source="get_status_display")
+    status_display = serializers.CharField(read_only=True, source="get_status_display")
 
     def create(self, validated_data):
         invitation = super().create(validated_data)
@@ -63,7 +66,7 @@ class InvitationSerializer(ModelSerializer):
         ]
 
 
-class ProjectSerializer(ModelSerializer):
+class ProjectSerializer(serializers.ModelSerializer):
     team_obj = TeamSerializer(read_only=True)
     created_by = CustomUserSerializer(read_only=True)
 

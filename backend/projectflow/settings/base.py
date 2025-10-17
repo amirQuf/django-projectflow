@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,29 +22,51 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-520z#+x%8saa$0@dcen1yx$2cmmr-c3h(#c5ozgi25kdgl7dgb"
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = config("DEBUG")
 
+ALLOWED_HOSTS = []
 
-DEBUG = False
-
-ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
-INSTALLED_APPS = [
+
+# ========================
+# Django Default Apps
+# ========================
+DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # 3rd-party
-    # local
-    "users.apps.UsersConfig",
-    "core",
 ]
+
+
+# ========================
+# 3rd party  Apps
+# ========================
+THIRD_PARTY_APPS = [
+    "rest_framework_simplejwt",
+    "rest_framework",
+]
+
+
+# ========================
+#  My Apps
+# ========================
+LOCAL_APPS = [
+    "core.apps.CoreConfig",
+    "users.apps.UsersConfig",
+    "team.apps.TeamConfig",
+]
+
+
+INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -125,3 +149,33 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+AUTH_USER_MODEL = "users.CustomUser"
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+}
+
+
+STATIC_ROOT = BASE_DIR / "static"
+
+
+STATICFILES_DIRS = [
+    BASE_DIR / "assets",
+]
+
+STATIC_URL = "/static/"
+MEDIA_URL = "/media/"
+
+APPEND_SLASH = True
+
+REST_USE_JWT = True
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

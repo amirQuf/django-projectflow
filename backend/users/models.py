@@ -9,3 +9,10 @@ class CustomUser(AbstractUser):
     linkedin_link = models.URLField(blank=True)
     portfolio_link = models.URLField(blank=True)
     is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.super()
+
+    class Meta:
+        verbose_name = "User"
+        verbose_name_plural = "Users"

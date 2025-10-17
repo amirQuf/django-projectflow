@@ -1,12 +1,3 @@
-from .models import Invitation
-
-
-def invite_user(team, email):
-    invitation = Invitation.object.create(team=team, email=email)
-    # invitation = f' { request.get_host }/{invitation.token}'
-    return invitation
-
-
 from django.core.mail import send_mail
 
 
