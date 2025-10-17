@@ -1,6 +1,5 @@
 # django-projectflow
 ---
-A web application where users (teams, freelancers, companies) can create projects, assign tasks, chat, upload files, see progress status, and make payments.
 
 ````markdown
 
@@ -25,8 +24,8 @@ A modern Django backend project following best practices for clean architecture,
 ---
 
 ## 🚀 Overview
-This project is a Django backend API designed for speed, scalability, and modularity.  
-It can be used as a boilerplate or extended for real-world applications.
+
+A web application where users (teams, freelancers, companies) can create projects, assign tasks, chat, upload files, see progress status, and make payments.
 
 ---
 
