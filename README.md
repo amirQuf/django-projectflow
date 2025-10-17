@@ -1,27 +1,4 @@
 # django-projectflow
----
-
-````markdown
-
-
-# 🐍 Django Backend Project
-A modern Django backend project following best practices for clean architecture, scalability, and maintainability.
----
-## 📑 Table of Contents
-- [🚀 Overview](#-overview)
-- [⚙️ Tech Stack](#️-tech-stack)
-- [📂 Project Structure](#-project-structure)
-- [🧩 Features](#-features)
-- [🛠️ Installation & Setup](#️-installation--setup)
-- [▶️ Usage](#️-usage)
-- [🧰 Configuration](#-configuration)
-- [🧪 Testing](#-testing)
-- [🧠 My Notes / TODO](#-my-notes--todo)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
-- [👤 Author](#-author)
-
----
 
 ## 🚀 Overview
 
