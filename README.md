@@ -1,27 +1,4 @@
 # django-projectflow
----
-
-````markdown
-
-
-# 🐍 Django Backend Project
-A modern Django backend project following best practices for clean architecture, scalability, and maintainability.
----
-## 📑 Table of Contents
-- [🚀 Overview](#-overview)
-- [⚙️ Tech Stack](#️-tech-stack)
-- [📂 Project Structure](#-project-structure)
-- [🧩 Features](#-features)
-- [🛠️ Installation & Setup](#️-installation--setup)
-- [▶️ Usage](#️-usage)
-- [🧰 Configuration](#-configuration)
-- [🧪 Testing](#-testing)
-- [🧠 My Notes / TODO](#-my-notes--todo)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
-- [👤 Author](#-author)
-
----
 
 ## 🚀 Overview
 
@@ -41,13 +18,61 @@ A web application where users (teams, freelancers, companies) can create project
 
 ## 📂 Project Structure
 ```bash
-project_name/
-│
-├── core/                # Core settings and configuration
-├── apps/                # Your Django apps go here
-├── requirements.txt     # Dependencies
-├── manage.py
-└── README.md
+.
+├── backend
+│   ├── asset
+│   ├── core
+│   │   ├── admin.py
+│   │   ├── api.py
+│   │   ├── apps.py
+│   │   ├── __init__.py
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   └── views.py
+│   ├── docker
+│   │   ├── docker-compose.yml
+│   │   └── Dockerfile
+│   ├── manage.py
+│   ├── projectflow
+│   │   ├── asgi.py
+│   │   ├── __init__.py
+│   │   ├── settings
+│   │   │   ├── base.py
+│   │   │   ├── dev.py
+│   │   │   └── prod.py
+│   │   ├── urls.py
+│   │   └── wsgi.py
+│   ├── team
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── __init__.py
+│   │   ├── models
+│   │   │   ├── __init__.py
+│   │   │   ├── invitation.py
+│   │   │   ├── project.py
+│   │   │   ├── team_member.py
+│   │   │   └── team.py
+│   │   ├── permissions.py
+│   │   ├── serializers.py
+│   │   ├── tasks.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   └── views.py
+│   └── users
+│       ├── admin.py
+│       ├── apps.py
+│       ├── __init__.py
+│       ├── migrations
+│       ├── models.py
+│       ├── __pycache__
+│       ├── serializers.py
+│       ├── tests.py
+│       ├── urls.py
+│       └── views.py
+├── LICENSE
+├── README.md
+└── requirements.txt
+
 ````
 
 ---
@@ -67,8 +92,7 @@ project_name/
 ```bash
 # 1️⃣ Clone the repo
 git clone https://github.com/your-username/project-name.git
-cd project-name
-
+cd django-projectflow
 # 2️⃣ Create & activate virtual environment
 python -m venv venv
 source venv/bin/activate   # (Linux/Mac)
@@ -77,7 +101,12 @@ venv\Scripts\activate      # (Windows)
 # 3️⃣ Install dependencies
 pip install -r requirements.txt
 
+
+cd backend
+
 # 4️⃣ Apply migrations
+
+python manage.py makemigrations
 python manage.py migrate
 
 # 5️⃣ Run development server
