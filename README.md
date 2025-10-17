@@ -92,8 +92,7 @@ A web application where users (teams, freelancers, companies) can create project
 ```bash
 # 1️⃣ Clone the repo
 git clone https://github.com/your-username/project-name.git
-cd project-name
-
+cd django-projectflow
 # 2️⃣ Create & activate virtual environment
 python -m venv venv
 source venv/bin/activate   # (Linux/Mac)
@@ -102,7 +101,12 @@ venv\Scripts\activate      # (Windows)
 # 3️⃣ Install dependencies
 pip install -r requirements.txt
 
+
+cd backend
+
 # 4️⃣ Apply migrations
+
+python manage.py makemigrations
 python manage.py migrate
 
 # 5️⃣ Run development server
