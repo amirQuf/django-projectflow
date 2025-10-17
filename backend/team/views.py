@@ -1,6 +1,8 @@
 from rest_framework.viewsets import ModelViewSet
 
 
+from .renderers import CustomRenderer
+
 from .serializers import (
     TeamSerializer,
     TeamMemberSerializer,
@@ -19,16 +21,25 @@ from rest_framework.response import Response
 class TeamViewSet(ModelViewSet):
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
+    renderer_classes = [
+        CustomRenderer,
+    ]
 
 
 class TeamMemberViewSet(ModelViewSet):
     queryset = TeamMember.objects.all()
     serializer_class = TeamMemberSerializer
+    renderer_classes = [
+        CustomRenderer,
+    ]
 
 
 class InvitationViewSet(ModelViewSet):
     queryset = Invitation.objects.all()
     serializer_class = InvitationSerializer
+    renderer_classes = [
+        CustomRenderer,
+    ]
 
     def create(self, request):
 
@@ -49,3 +60,6 @@ class InvitationViewSet(ModelViewSet):
 class ProjectViewSet(ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
+    renderer_classes = [
+        CustomRenderer,
+    ]

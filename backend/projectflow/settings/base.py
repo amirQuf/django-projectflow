@@ -52,6 +52,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework_simplejwt",
     "rest_framework",
+    "corsheaders",
 ]
 
 
@@ -155,9 +156,18 @@ AUTH_USER_MODEL = "users.CustomUser"
 
 
 REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 10,
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+        "rest_framework.renderers.BrowsableAPIRenderer",
+    ],
 }
 
 
