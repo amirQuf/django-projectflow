@@ -16,3 +16,14 @@ class TeamMember(models.Model):
         ordering = ["-joined_at"]
         verbose_name = "Team Member"
         verbose_name_plural = "Team Members"
+
+    def display_role(self):
+        if self.role == 1:
+            return "MEMBER"
+        elif self.role == 2:
+            return "ADMIN"
+        else:
+            return "MANAGER"
+
+    def __str__(self):
+        return f"{self.user}({self.role}) | {self.team}"

@@ -31,22 +31,49 @@ class TeamSerializer(serializers.ModelSerializer):
 class TeamMemberSerializer(serializers.ModelSerializer):
     team = TeamSerializer(read_only=True)
     user = CustomUserSerializer(read_only=True)
-
+    user_id = serializers.PrimaryKeyRelatedField(
+        queryset=CustomUser.objects.all(), write_only=True
+    )
     team_id = serializers.PrimaryKeyRelatedField(
         queryset=Team.objects.all(), write_only=True
     )
 
+    def create(self, validated_data):
+        team = validated_data.pop("team_id")
+        user = validated_data.pop("user_id")
+        teammember = TeamMember.objects.create(team=team, user=user, **validated_data)
+        return teammember
+
     class Meta:
         model = TeamMember
-        fields = ["id", "team", "user", "role", "joined_at"]
+        fields = [
+            "id",
+            "team",
+            "team_id",
+            "user_id",
+            "user",
+            "display_role",
+            "role",
+            "joined_at",
+        ]
 
 
 class InvitationSerializer(serializers.ModelSerializer):
     team = TeamSerializer(read_only=True)
     status_display = serializers.CharField(read_only=True, source="get_status_display")
+    user = CustomUserSerializer(read_only=True)
+    user_id = serializers.PrimaryKeyRelatedField(
+        queryset=CustomUser.objects.all(), write_only=True
+    )
+    team_id = serializers.PrimaryKeyRelatedField(
+        queryset=Team.objects.all(), write_only=True
+    )
 
     def create(self, validated_data):
-        invitation = super().create(validated_data)
+        team = validated_data.pop("team_id")
+        user = validated_data.pop("user_id")
+
+        invitation = Invitation.objects.create(team=team, user=user, **validated_data)
         send_invitation_email(invitation)
         return invitation
 
@@ -55,8 +82,9 @@ class InvitationSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "team",
-            # "team_obj",
-            "email",
+            "team_id",
+            "user",
+            "user_id",
             "token",
             "status",
             "status_display",
@@ -67,8 +95,22 @@ class InvitationSerializer(serializers.ModelSerializer):
 
 
 class ProjectSerializer(serializers.ModelSerializer):
-    team_obj = TeamSerializer(read_only=True)
+    team = TeamSerializer(read_only=True)
     created_by = CustomUserSerializer(read_only=True)
+    creator_id = serializers.PrimaryKeyRelatedField(
+        queryset=CustomUser.objects.all(), write_only=True
+    )
+    team_id = serializers.PrimaryKeyRelatedField(
+        queryset=Team.objects.all(), write_only=True
+    )
+
+    def create(self, validated_data):
+        team = validated_data.pop("team_id")
+        creator = validated_data.pop("creator_id")
+        project = Project.objects.create(
+            team=team, created_by=creator, **validated_data
+        )
+        return project
 
     class Meta:
         model = Project
@@ -77,9 +119,10 @@ class ProjectSerializer(serializers.ModelSerializer):
             "name",
             "description",
             "team",
-            "team_obj",
+            "team_id",
             "start_date",
             "end_date",
             "created_by",
+            "creator_id",
             "created_at",
         ]

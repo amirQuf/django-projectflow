@@ -2,7 +2,7 @@ from django.core.mail import send_mail
 
 
 def send_invitation_email(invitation):
-    message = f"""Hi {invitation.email},
+    message = f"""Hi {invitation.user.username},
 You have been invited to join the team "{invitation.team.name}"," 
 Click the link below to accept the invitation and join the team:
 {invitation.invite_link()}
@@ -16,5 +16,5 @@ Welcome aboard!
         subject="You're invited!",
         message=message,
         from_email="no-reply@yourapp.com",
-        recipient_list=[invitation.email],
+        recipient_list=[invitation.user.email],
     )

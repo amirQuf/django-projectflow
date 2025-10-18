@@ -11,7 +11,7 @@ class CustomUser(AbstractUser):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.super()
+        return self.username
 
     class Meta:
         verbose_name = "User"
