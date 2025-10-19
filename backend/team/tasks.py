@@ -1,4 +1,7 @@
 from django.core.mail import send_mail
+from .models.invitation import Invitation
+
+from .selectors import find_expired_invitations
 
 
 def send_invitation_email(invitation):
@@ -18,3 +21,13 @@ Welcome aboard!
         from_email="no-reply@yourapp.com",
         recipient_list=[invitation.user.email],
     )
+
+
+def set_expired_status():
+    """
+    find invitations that is expires and set their status
+    """
+    invitations = find_expired_invitations()
+    for invitation in invitations:
+        invitation.status = Invitation.Status.EXPIRED
+    print("done")
