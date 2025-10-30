@@ -5,3 +5,6 @@ services:
       target: builder
     ports: 
       - '8000:8000'
+  # db:
+  #   image:
+  #   port: 

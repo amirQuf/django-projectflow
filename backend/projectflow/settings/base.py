@@ -63,6 +63,7 @@ LOCAL_APPS = [
     "core.apps.CoreConfig",
     "users.apps.UsersConfig",
     "team.apps.TeamConfig",
+    "tasks.apps.TasksConfig",
 ]
 
 

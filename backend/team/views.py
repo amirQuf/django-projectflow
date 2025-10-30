@@ -9,27 +9,29 @@ from .serializers import (
     InvitationSerializer,
     ProjectSerializer,
 )
-from .models.team import Team
-from .models.team_member import TeamMember
-from .models.invitation import Invitation
-from .models.project import Project
 
 
 from rest_framework.response import Response
+from .selectors import (
+    get_all_teams,
+    get_all_team_member,
+    get_all_Invitation,
+    get_all_project,
+)
 
 
 class TeamViewSet(ModelViewSet):
-    queryset = Team.objects.all()
+    queryset = get_all_teams()
     serializer_class = TeamSerializer
 
 
 class TeamMemberViewSet(ModelViewSet):
-    queryset = TeamMember.objects.all()
+    queryset = get_all_team_member()
     serializer_class = TeamMemberSerializer
 
 
 class InvitationViewSet(ModelViewSet):
-    queryset = Invitation.objects.all()
+    queryset = get_all_Invitation()
     serializer_class = InvitationSerializer
 
     def create(self, request):
@@ -50,5 +52,5 @@ class InvitationViewSet(ModelViewSet):
 
 
 class ProjectViewSet(ModelViewSet):
-    queryset = Project.objects.all()
+    queryset = get_all_project()
     serializer_class = ProjectSerializer
