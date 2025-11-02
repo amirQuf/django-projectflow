@@ -6,6 +6,7 @@ class CustomRenderer(renderers.JSONRenderer):
     charset = "utf-8"
 
     def render(self, data, accepted_media_type=None, renderer_context=None):
+
         response_data = dict()
 
         if "ErrorDetail" in str(data):

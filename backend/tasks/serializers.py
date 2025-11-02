@@ -1,4 +1,4 @@
-from .models import Task, Comment
+from .models import Task, Comment, Attachment
 
 
 from rest_framework import serializers
@@ -69,3 +69,19 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ["task", "user", "content", "created_at"]
+
+
+class AttachmentSerializer(serializers.ModelSerializer):
+    uploaded_by = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        model = Attachment
+        fields = [
+            "id",
+            "uploaded_by",
+            "file",
+            "project",
+            "task",
+            "created_at",
+            "updated_at",
+        ]

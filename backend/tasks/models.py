@@ -50,3 +50,10 @@ class Comment(models.Model):
         ordering = ["-created_at"]
         verbose_name = "Comment"
         verbose_name_plural = "Comments"
+
+
+class Attachment(models.Model):
+    task = models.ForeignKey(Task,, null=True, blank=True, on_delete=models.CASCADE)
+    uploaded_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    file = models.FileField(upload_to='attachments/%Y/%m/%d/')
+    project = models.ForeignKey('projects.Project', on_delete=models.CASCADE, null=True, blank=True, related_name='attachments')
