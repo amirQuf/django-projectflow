@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "team.apps.TeamConfig",
     "tasks.apps.TasksConfig",
+    "communication.apps.CommunicationConfig",
 ]
 
 
@@ -159,3 +160,15 @@ REST_USE_JWT = True
 
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+
+ASGI_APPLICATION = "config.asgi.application"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}

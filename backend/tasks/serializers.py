@@ -72,7 +72,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class AttachmentSerializer(serializers.ModelSerializer):
-    uploaded_by = serializers.StringRelatedField(read_only=True)
+    uploaded_by = CustomUserSerializer(read_only=True)
 
     class Meta:
         model = Attachment

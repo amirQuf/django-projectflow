@@ -1,6 +1,7 @@
 from rest_framework.routers import SimpleRouter
 from .views import TeamViewSet, TeamMemberViewSet, InvitationViewSet, ProjectViewSet
 
+
 router = SimpleRouter()
 router.register("team", TeamViewSet)
 router.register("teammeber", TeamMemberViewSet)

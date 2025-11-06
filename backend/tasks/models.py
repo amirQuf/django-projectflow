@@ -19,7 +19,9 @@ class Task(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     title = models.CharField(max_length=80)
     description = models.TextField(null=True, blank=True)
-    assigned_to = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    assigned_to = models.ForeignKey(
+        CustomUser, related_name="assigned", on_delete=models.CASCADE
+    )
     priority = models.CharField(
         max_length=1, choices=Priority.choices, default=Priority.LOW
     )
@@ -53,7 +55,13 @@ class Comment(models.Model):
 
 
 class Attachment(models.Model):
-    task = models.ForeignKey(Task,, null=True, blank=True, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, null=True, blank=True, on_delete=models.CASCADE)
     uploaded_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    file = models.FileField(upload_to='attachments/%Y/%m/%d/')
-    project = models.ForeignKey('projects.Project', on_delete=models.CASCADE, null=True, blank=True, related_name='attachments')
+    file = models.FileField(upload_to="attachments/%Y/%m/%d/")
+    project = models.ForeignKey(
+        Project,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name="attachments",
+    )

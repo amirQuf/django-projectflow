@@ -5,12 +5,12 @@ from .serializers import TaskSerializer, CommentSerializer, AttachmentSerializer
 
 
 class TaskViewSet(ModelViewSet):
-    query_set = get_all_tasks()
+    queryset = get_all_tasks()
     serializer_class = TaskSerializer
 
 
 class CommentViewSet(ModelViewSet):
-    query_set = get_all_comment()
+    queryset = get_all_comment()
     serializer_class = CommentSerializer
 
 
