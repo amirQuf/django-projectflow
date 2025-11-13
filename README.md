@@ -91,7 +91,7 @@ A web application where users (teams, freelancers, companies) can create project
 
 ```bash
 # 1️⃣ Clone the repo
-git clone https://github.com/your-username/project-name.git
+git clone https://github.com/amirQuf/django-projectflow.git
 cd django-projectflow
 # 2️⃣ Create & activate virtual environment
 python -m venv venv
