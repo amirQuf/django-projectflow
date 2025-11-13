@@ -27,15 +27,18 @@ class TaskSerializer(serializers.ModelSerializer):
         creator = validated_data.pop("creator_id")
         worker = validated_data.pop("worker_id")
         project = validated_data.pop("project_id")
-        project = Task.objects.create(
+        task = Task.objects.create(
             created_by=creator, assigned_to=worker, project=project, **validated_data
         )
-        return project
+        return task
 
     class Meta:
         model = Task
         fields = [
             "project",
+            "creator_id",
+            "worker_id",
+            "project_id",
             "title",
             "description",
             "assigned_to",
@@ -62,13 +65,13 @@ class CommentSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = validated_data.pop("user_id")
         task = validated_data.pop("task_id")
-        comment = Comment.object.create(user=user, task=task)
+        comment = Comment.objects.create(user=user, task=task, **validated_data)
 
         return comment
 
     class Meta:
         model = Comment
-        fields = ["task", "user", "content", "created_at"]
+        fields = ["task", "user", "user_id", "task_id", "content", "created_at"]
 
 
 class AttachmentSerializer(serializers.ModelSerializer):
@@ -82,6 +85,4 @@ class AttachmentSerializer(serializers.ModelSerializer):
             "file",
             "project",
             "task",
-            "created_at",
-            "updated_at",
         ]

@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     # 3rd-party
     "rest_framework_simplejwt",
     "rest_framework",
+    "channels",
+    "drf_yasg",
     # local
     "core.apps.CoreConfig",
     "users.apps.UsersConfig",

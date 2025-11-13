@@ -11,9 +11,9 @@ class BaseModel(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        abstract = True  # مهم! تا ازش مدل واقعی در دیتابیس ساخته نشه
-        ordering = ["-created_at"]  # به طور پیش‌فرض مرتب‌سازی نزولی بر اساس زمان ساخت
-        get_latest_by = "created_at"  # برای latest()
-        default_permissions = ("add", "change", "delete", "view")  # دسترسی‌های پیش‌فرض
+        abstract = True
+        ordering = ["-created_at"]
+        get_latest_by = "created_at"
+        default_permissions = ("add", "change", "delete", "view")
         verbose_name = "Base Model"
         verbose_name_plural = "Base Models"
