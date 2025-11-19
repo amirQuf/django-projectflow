@@ -74,7 +74,7 @@ class InvitationSerializer(serializers.ModelSerializer):
         user = validated_data.pop("user_id")
 
         invitation = Invitation.objects.create(team=team, user=user, **validated_data)
-        send_invitation_email(invitation)
+        send_invitation_email.delay(invitation)
         return invitation
 
     class Meta:
